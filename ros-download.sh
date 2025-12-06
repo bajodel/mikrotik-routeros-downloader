@@ -27,12 +27,12 @@ if [ -z "$1" ]; then
 fi
 
 VERSION="$1"
-#old# DEST="${2:-.}" # default: download to current directory if a path is not provided as second argument
-DEST="${2:-${VERSION}}" # create a folder named "version" if a custom path is not provided (as second argument)
+#old# DEST="${2:-.}" # default: download to current directory if a path is not provided (as second argument)
+DEST="${2:-${VERSION}}" # create a folder named "$VERSION if a custom path is not provided (as second argument)
 
 # validate destination directory (optional second argument)
 if [ ! -d "$DEST" ]; then
-    echo "Destination directory '$DEST' does not exist. Creating..."
+    echo "Destination directory '$DEST' does not exist. Creating.."
     mkdir -p "$DEST" || { echo "Error: Could not create destination directory."; exit 2; }
 fi
 
@@ -53,8 +53,8 @@ https://download.mikrotik.com/routeros/${VERSION}/chr-${VERSION}.ova
 https://download.mikrotik.com/routeros/${VERSION}/chr-${VERSION}.vhd.zip
 https://download.mikrotik.com/routeros/${VERSION}/chr-${VERSION}.vmdk.zip
 
-## NOTE: no "CHR ARM64" in ros6
-## NOTE: no "ARM64 ISO" in ros6
+## Note: CHR ARM64 not available for v6
+## Note: ISO ARM64 not available for v6
 
 ## x86
 https://download.mikrotik.com/routeros/${VERSION}/routeros-x86-${VERSION}.npk
@@ -200,13 +200,13 @@ TOTAL=${#URL_LIST[@]}
 SUCCESS=0
 FAILED=0
 
-echo "Starting downloads for version '$VERSION' to destination '$DEST'.."
+echo "Starting downloads for version '$VERSION' to destination '$DEST'"
 echo "Total files to download: $TOTAL"
 COUNTER=1
 
 for url in "${URL_LIST[@]}"; do
     fname=$(basename "$url")
-    echo "[$COUNTER/$TOTAL] Downloading $fname ..."
+    echo "[$COUNTER/$TOTAL] Downloading $fname .."
     curl -L -o "$DEST/$fname" --fail --silent --show-error "$url"
     if [ $? -eq 0 ]; then
         echo "    Done: $fname"
@@ -226,7 +226,7 @@ echo "Successfully downloaded: $SUCCESS"
 echo "Failed downloads: $FAILED"
 
 if [ "$FAILED" -gt 0 ]; then
-    echo "WARNING: There were $FAILED failed downloads. Please check your network or version validity."
+    echo "WARNING: There were $FAILED failed downloads."
 fi
 
 echo "All downloads completed."
