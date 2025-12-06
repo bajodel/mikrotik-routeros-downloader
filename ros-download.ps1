@@ -22,7 +22,7 @@ if (!(Test-Path $dest)) {
 }
 
 if ($version -match '^6') {
-    Write-Host "Detected RouterOS v6, using full v6 URL list."
+    Write-Host "Requested RouterOS $version .."
     $urls = @(
         "https://download.mikrotik.com/routeros/$version/chr-$version.img.zip",
         "https://download.mikrotik.com/routeros/$version/chr-$version.vdi.zip",
@@ -55,12 +55,11 @@ if ($version -match '^6') {
         "https://download.mikrotik.com/routeros/$version/netinstall-$version.tar.gz",
         "https://download.mikrotik.com/routeros/$version/mikrotik.mib",
         "https://download.mikrotik.com/routeros/$version/dude-install-$version.exe",
-        "https://download.mikrotik.com/routeros/$version/dude-install-$version.exe",
         "https://download.mikrotik.com/routeros/$version/btest.exe",
         "https://download.mikrotik.com/routeros/$version/flashfig.exe"
     )
 } elseif ($version -match '^7') {
-    Write-Host "Detected RouterOS v7, using full v7 URL list."
+    Write-Host "Requested RouterOS $version .."
     $urls = @(
         "https://download.mikrotik.com/routeros/$version/chr-$version.img.zip",
         "https://download.mikrotik.com/routeros/$version/chr-$version.vdi.zip",
@@ -93,7 +92,6 @@ if ($version -match '^6') {
         "https://download.mikrotik.com/routeros/$version/netinstall-$version.zip",
         "https://download.mikrotik.com/routeros/$version/netinstall-$version.tar.gz",
         "https://download.mikrotik.com/routeros/$version/mikrotik.mib",
-        "https://download.mikrotik.com/routeros/$version/dude-install-$version.exe",
         "https://download.mikrotik.com/routeros/$version/dude-install-$version.exe",
         "https://download.mikrotik.com/routeros/$version/btest.exe",
         "https://download.mikrotik.com/routeros/$version/flashfig.exe"
