@@ -9,6 +9,9 @@ Download Mikrotik RouterOS images and packages for a specific version in one go.
 
 ## Quick Start
 
+> ⚠️ NOTE
+> These scripts download files for **all supported architectures** (CHR, x86, arm, arm64, tile, etc.). If you typically only need a subset, edit the script to **remove the unnecessary entries to save time and bandwidth**.
+
 ### Linux (bash)
 
 1) Save the bash script locally (e.g., `ros-download.sh`) and make it executable:
