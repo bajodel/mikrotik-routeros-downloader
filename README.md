@@ -7,10 +7,11 @@ Download Mikrotik RouterOS images and packages for a specific version in one go.
 - RouterOS versions: v6 and v7
 - Simple usage: copy/paste or download the script and run with the desired version
 
-## Quick Start
-
 > ⚠️ NOTE
 > These scripts download files for **all supported architectures** (CHR, x86, arm, arm64, tile, etc.). If you typically only need a subset, edit the script to **remove the unnecessary entries to save time and bandwidth**.
+
+
+## Quick Start
 
 ### Linux (bash)
 
