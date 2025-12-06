@@ -1,4 +1,4 @@
-# Mikrotik RouterOS Downloader
+# Mikrotik RouterOS Downloader Script
 
 Download Mikrotik RouterOS images and packages for a specific version in one go. Supports both Linux (bash) and Windows (PowerShell), and handles RouterOS v6 and v7.
 
