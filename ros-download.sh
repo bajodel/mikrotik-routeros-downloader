@@ -27,23 +27,23 @@ if [ -z "$1" ]; then
 fi
 
 VERSION="$1"
-#old# DEST="${2:-.}" # default: download to current directory if a path is not provided (as second argument)
-DEST="${2:-${VERSION}}" # create a folder named "$VERSION if a custom path is not provided (as second argument)
+#old# DEST="${2:-.}"    # old default: download to current directory if a path is not provided (as second argument)
+DEST="${2:-${VERSION}}" # create a folder named "${VERSION} if a custom path is not provided (as second argument)
 
 # validate destination directory (optional second argument)
-if [ ! -d "$DEST" ]; then
-    echo "Destination directory '$DEST' does not exist. Creating.."
-    mkdir -p "$DEST" || { echo "Error: Could not create destination directory."; exit 2; }
+if [ ! -d "${DEST}" ]; then
+    echo "Destination directory '${DEST}' does not exist. Creating.."
+    mkdir -p "${DEST}" || { echo "Error: Could not create destination directory."; exit 2; }
 fi
 
 # evaluate major version (first number) to select the correct URL list
 MAJOR_VERSION="${VERSION%%.*}"
 
 if [ "$MAJOR_VERSION" = "6" ]; then
-    echo "Requested RouterOS v6, using URL6 list."
+    echo "Requested RouterOS v${VERSION}, using URL6 list.."
     URLS=$(cat <<EOF
 
-## URL6 - RouterOS v6 files##
+## URL6 - RouterOS v6 files schema ##
 
 ## CHR x86
 https://download.mikrotik.com/routeros/${VERSION}/chr-${VERSION}.img.zip
@@ -90,32 +90,34 @@ https://download.mikrotik.com/routeros/${VERSION}/all_packages-smips-${VERSION}.
 https://download.mikrotik.com/routeros/${VERSION}/routeros-tile-${VERSION}.npk
 https://download.mikrotik.com/routeros/${VERSION}/all_packages-tile-${VERSION}.zip
 
-## NETINSTALL
+
+## TOOLS
+
+#- NETINSTALL
 https://download.mikrotik.com/routeros/${VERSION}/netinstall64-${VERSION}.zip
 https://download.mikrotik.com/routeros/${VERSION}/netinstall-${VERSION}.zip
 https://download.mikrotik.com/routeros/${VERSION}/netinstall-${VERSION}.tar.gz
 
-## MIBs
+#- MIBs
 https://download.mikrotik.com/routeros/${VERSION}/mikrotik.mib
 
-## DUDE (install and client)
-https://download.mikrotik.com/routeros/${VERSION}/dude-install-${VERSION}.exe
+#- DUDE CLIENT
 https://download.mikrotik.com/routeros/${VERSION}/dude-install-${VERSION}.exe
 
-## Bandwidth Test
+#- BANDWIDTH TEST
 https://download.mikrotik.com/routeros/${VERSION}/btest.exe
 
-## FLASHFIG
+#- FLASHFIG
 https://download.mikrotik.com/routeros/${VERSION}/flashfig.exe
 
 EOF
 )
 
 elif [ "$MAJOR_VERSION" = "7" ]; then
-    echo "Requested RouterOS v7, using URL7 list."
+    echo "Requested RouterOS v${VERSION}, using URL7 list.."
     URLS=$(cat <<EOF
 
-## URL7 - RouterOS v7 files##
+## URL7 - RouterOS v7 files schema ##
 
 ## CHR x86
 https://download.mikrotik.com/routeros/${VERSION}/chr-${VERSION}.img.zip
@@ -164,28 +166,30 @@ https://download.mikrotik.com/routeros/${VERSION}/all_packages-smips-${VERSION}.
 https://download.mikrotik.com/routeros/${VERSION}/routeros-${VERSION}-tile.npk
 https://download.mikrotik.com/routeros/${VERSION}/all_packages-tile-${VERSION}.zip
 
-## NETINSTALL
+
+## TOOLS
+
+#- NETINSTALL
 https://download.mikrotik.com/routeros/${VERSION}/netinstall64-${VERSION}.zip
 https://download.mikrotik.com/routeros/${VERSION}/netinstall-${VERSION}.zip
 https://download.mikrotik.com/routeros/${VERSION}/netinstall-${VERSION}.tar.gz
 
-## MIBs
+#- MIBs
 https://download.mikrotik.com/routeros/${VERSION}/mikrotik.mib
 
-## DUDE (install and client)
-https://download.mikrotik.com/routeros/${VERSION}/dude-install-${VERSION}.exe
+#- DUDE CLIENT
 https://download.mikrotik.com/routeros/${VERSION}/dude-install-${VERSION}.exe
 
-## Bandwidth Test
+#- BANDWIDTH TEST
 https://download.mikrotik.com/routeros/${VERSION}/btest.exe
 
-## FLASHFIG
+#- FLASHFIG
 https://download.mikrotik.com/routeros/${VERSION}/flashfig.exe
 
 EOF
 )
 else
-    echo "Error: Unsupported version ($VERSION). Only major version 6 or 7 is supported."
+    echo "Error: Unsupported version (${VERSION}). Only major version 6 or 7 is supported."
     exit 3
 fi
 
@@ -201,14 +205,14 @@ TOTAL=${#URL_LIST[@]}
 SUCCESS=0
 FAILED=0
 
-echo "Starting downloads for version '$VERSION' to destination '$DEST'"
+echo "Starting downloads for version '${VERSION}' to destination '${DEST}'"
 echo "Total files to download: $TOTAL"
 COUNTER=1
 
 for url in "${URL_LIST[@]}"; do
     fname=$(basename "$url")
     echo "[$COUNTER/$TOTAL] Downloading $fname .."
-    curl -L -o "$DEST/$fname" --fail --silent --show-error "$url"
+    curl -L -o "${DEST}/$fname" --fail --silent --show-error "$url"
     if [ $? -eq 0 ]; then
         echo "    Done: $fname"
         SUCCESS=$((SUCCESS + 1))
