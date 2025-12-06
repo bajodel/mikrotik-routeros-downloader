@@ -26,10 +26,10 @@ chmod +x ros-download.sh
 ```
 
 What it does:
-- Validates the version and selects the file list for v6 or v7
+- Detects v6 vs v7 and uses the file list for that major version
 - Creates the destination folder if it doesn’t exist
-- Downloads files one-by-one and overwrites existing files
-- Prints progress and a summary with success/failure counts
+- Downloads each file and shows progress
+- Prints a summary with success/failure counts
 
 Requirements:
 - bash
@@ -53,7 +53,8 @@ powershell -ExecutionPolicy Bypass -File .\ros-download.ps1 6.49.19 'C:\Download
 What it does:
 - Detects v6 vs v7 and uses the file list for that major version
 - Creates the destination folder if needed
-- Downloads each file and shows progress with success/failure summary
+- Downloads each file and shows progress
+- Prints a summary with success/failure counts
 
 Requirements:
 - PowerShell (Windows 10/11 or PowerShell Core)
