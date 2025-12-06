@@ -17,7 +17,7 @@ Param(
 )
 
 if (!(Test-Path $dest)) {
-    Write-Host "Destination directory '$dest' does not exist. Creating..."
+    Write-Host "Destination directory '$dest' does not exist. Creating.."
     New-Item -ItemType Directory -Path $dest | Out-Null
 }
 
@@ -73,6 +73,7 @@ if ($version -match '^6') {
         "https://download.mikrotik.com/routeros/$version/mikrotik-$version.iso",
         "https://download.mikrotik.com/routeros/$version/install-image-$version.zip",
         "https://download.mikrotik.com/routeros/$version/all_packages-x86-$version.zip",
+        "https://download.mikrotik.com/routeros/$version/routeros-$version-arm64.npk"
         "https://download.mikrotik.com/routeros/$version/mikrotik-$version-arm64.iso",
         "https://download.mikrotik.com/routeros/$version/all_packages-arm64-$version.zip",
         "https://download.mikrotik.com/routeros/$version/routeros-$version-arm.npk",
@@ -105,13 +106,13 @@ $total = $urls.Count
 $success = 0
 $fail = 0
 
-Write-Host "Starting downloads for version '$version' to destination '$dest'..."
+Write-Host "Starting downloads for version '$version' to destination '$dest'.."
 Write-Host "Total files to download: $total"
 
 for ($i=0; $i -lt $total; $i++) {
     $url = $urls[$i]
     $fname = Split-Path $url -Leaf
-    Write-Host "[$($i+1)/$total] Downloading $fname ..."
+    Write-Host "[$($i+1)/$total] Downloading $fname .."
     try {
         Invoke-WebRequest -Uri $url -OutFile (Join-Path $dest $fname) -ErrorAction Stop
         Write-Host "    Done: $fname"
@@ -128,6 +129,7 @@ Write-Host "Total files listed         : $total"
 Write-Host "Successfully downloaded    : $success"
 Write-Host "Failed downloads           : $fail"
 if ($fail -gt 0) {
-    Write-Host "WARNING: There were $fail failed downloads. Please check your network or version validity."
+    Write-Host "WARNING: There were $fail failed downloads."
 }
 Write-Host "All downloads completed."
+
