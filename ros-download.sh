@@ -135,6 +135,7 @@ https://download.mikrotik.com/routeros/${VERSION}/install-image-${VERSION}.zip
 https://download.mikrotik.com/routeros/${VERSION}/all_packages-x86-${VERSION}.zip
 
 ## ARM64
+https://download.mikrotik.com/routeros/${VERSION}/routeros-${VERSION}-arm64.npk
 https://download.mikrotik.com/routeros/${VERSION}/mikrotik-${VERSION}-arm64.iso
 https://download.mikrotik.com/routeros/${VERSION}/all_packages-arm64-${VERSION}.zip
 
@@ -229,3 +230,4 @@ if [ "$FAILED" -gt 0 ]; then
 fi
 
 echo "All downloads completed."
+
