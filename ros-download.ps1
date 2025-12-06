@@ -36,6 +36,7 @@ if ($version -match '^6') {
         "https://download.mikrotik.com/routeros/$version/mikrotik-$version.iso",
         "https://download.mikrotik.com/routeros/$version/install-image-$version.zip",
         "https://download.mikrotik.com/routeros/$version/all_packages-x86-$version.zip",
+        "https://download.mikrotik.com/routeros/$version/routeros-arm64-$version.npk",
         "https://download.mikrotik.com/routeros/$version/all_packages-arm64-$version.zip",
         "https://download.mikrotik.com/routeros/$version/routeros-arm-$version.npk",
         "https://download.mikrotik.com/routeros/$version/all_packages-arm-$version.zip",
@@ -132,4 +133,3 @@ if ($fail -gt 0) {
     Write-Host "WARNING: There were $fail failed downloads."
 }
 Write-Host "All downloads completed."
-
